@@ -1,0 +1,177 @@
+---
+title: "hw02_gapminder exploration"
+author: "Maria Guo"
+date: "September 21, 2017"
+output: 
+  html_document:
+    keep_md: yes
+---
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+# Explore the gapminder object:
+
+1.Is it a data.frame, a matrix, a vector, a list?
+
+```{r}
+str(gapminder)
+```
+
+```{r}
+class(gapminder)
+mode(gapminder)
+typeof(gapminder)
+```
+
+2.What’s its class?
+
+```{r}
+class(gapminder)
+```
+
+3.How many variables/columns?
+
+```{r}
+ncol(gapminder)
+```
+
+4.How many rows/observations?
+
+```{r}
+nrow(gapminder)
+```
+
+5.Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?
+
+```{r}
+dim(gapminder)
+length(gapminder)
+```
+
+6.What data type is each variable?
+
+```{r}
+typeof(gapminder$country)
+typeof(gapminder$continent)
+typeof(gapminder$gdpPercap)
+typeof(gapminder$year)
+typeof(gapminder$lifeExp)
+typeof(gapminder$pop)
+```
+
+
+# Explore individual variables
+
+1. What are possible values (or range, whichever is appropriate) of each variable?
+```{r}
+summary(gapminder$continent)
+summary(gapminder$lifeExp)
+```
+
+
+2. What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.
+
+```{r}
+hist(gapminder$lifeExp)
+```
+
+# Explore various plot types
+
+1. table plot of continent
+
+```{r}
+table(gapminder$continent)
+barplot(table(gapminder$continent))
+```
+
+2. scatterplot of lifeExp vs log(gdpPercap)
+
+```{r}
+plot(lifeExp ~ log(gdpPercap), gapminder)
+```
+
+3. Histogram 
+
+```{r}
+hist(gapminder$gdpPercap)
+```
+
+# Use filter(), select() and %>%
+
+```{r}
+gapminder %>% 
+   filter(continent == "Europe", gdpPercap > 10000) %>% 
+   select(lifeExp) 
+```
+
+
+
+```{r}
+p <- ggplot(gapminder %>% 
+           filter(continent == "Europe", gdpPercap > 10000),
+           aes(x=continent, y=gdpPercap))
+p + geom_point(alpha=0.25, color="red")
+```
+
+
+# More
+
+1. Evaluate the code
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+It is not successful. It doesn't show all date for Rwanda and Afghanistan
+
+```{r}
+filter(gapminder, country == "Afghanistan")
+```
+If select for Afghanistan or Rwanda alone, there are total 12 data, instead of 6. Since we want either Rwanda or Afghanistan is true, so use "|" or "%in%" to get all data.
+
+
+```{r}
+filter(gapminder, 
+       country == "Rwanda" |
+           country == "Afghanistan")
+```
+
+
+
+2. Present numerical tables in a more attractive form, such as using knitr::kable().
+
+```{r}
+knitr::kable(gapminder, "html")
+```
+
+3. Use more of the dplyr functions for operating on a single table
+
+```{r}
+gapminder %>%
+  group_by(continent) %>%
+  summarize(n = n(),
+            n_countries = n_distinct(country))
+```
+```{r}
+ gapminder %>% 
+    mutate(log = lifeExp*pop) %>%
+    arrange(year, desc(pop))
+```
+
+
+
+4. Adapt exercises from the chapters in the “Explore” section of R for Data Science to the Gapminder dataset.
+
+```{r}
+dim(mpg)
+```
+
+```{r}
+p <-ggplot(data = mpg,
+           aes(x = cyl, y = hwy))
+p + geom_point()
+```
+
+
+
+
