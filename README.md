@@ -1,1 +1,1 @@
-# STAT545-hw2-Guo-Maria
+# You can find home work in [hw02 file](https://github.com/Maria815/STAT545-hw-Guo-Maria/tree/master/hw02) or you can directly [click there] (https://github.com/Maria815/STAT545-hw-Guo-Maria/blob/master/hw02/hw2_for_new_repo.md) to the home work
