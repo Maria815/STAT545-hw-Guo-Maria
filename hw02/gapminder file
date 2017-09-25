@@ -1,1 +1,6 @@
-# this is a empty hw
+---
+title: "stat545-hw02"
+author: "Maria Guo"
+date: "September 25, 2017"
+output: html_document
+---
