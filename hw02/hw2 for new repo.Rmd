@@ -24,24 +24,32 @@ class(gapminder)
 mode(gapminder)
 typeof(gapminder)
 ```
+gapminder is a data.frame, can also be a list.
+
 
 2.What’s its class?
 
 ```{r}
 class(gapminder)
 ```
+It is data.frame.
+
 
 3.How many variables/columns?
 
 ```{r}
 ncol(gapminder)
 ```
+There are 6 variables.
+
 
 4.How many rows/observations?
 
 ```{r}
 nrow(gapminder)
 ```
+there are 1740 rows.
+
 
 5.Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?
 
@@ -53,13 +61,10 @@ length(gapminder)
 6.What data type is each variable?
 
 ```{r}
-typeof(gapminder$country)
-typeof(gapminder$continent)
-typeof(gapminder$gdpPercap)
-typeof(gapminder$year)
-typeof(gapminder$lifeExp)
-typeof(gapminder$pop)
+glimpse(gapminder)
 ```
+
+country is factor, continent is factor, year and pop are integer, lifeExp and gdpPercap is double.
 
 
 # Explore individual variables
@@ -69,12 +74,16 @@ typeof(gapminder$pop)
 summary(gapminder$continent)
 summary(gapminder$lifeExp)
 ```
-
+There are 624 counties in Africa, 300 in America, 396 in Asia, 360 in Europe and 24 countires in Oceania.
+lifeExp ranges from 23.6 to 82.60 in dataset.
 
 2. What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.
 
+lifeExp in Asia and Africa are typical amoung other continent. In Africa, lifeExp ranges from 20 to 78, 40 to 80 in Americas, 20 to 82 in Asia, 58 to 81 in Europe and 69 to 81 in Oceania.
+
 ```{r}
-hist(gapminder$lifeExp)
+ggplot(gapminder,aes(continent, lifeExp)) +
+       geom_point()
 ```
 
 # Explore various plot types
@@ -122,13 +131,11 @@ p + geom_point(alpha=0.25, color="red")
 ```{r}
 filter(gapminder, country == c("Rwanda", "Afghanistan"))
 ```
-It is not successful. It doesn't show all date for Rwanda and Afghanistan
+It is not successful. c() makes a vector of "Rwanda" and "Afghanistan", it doesn't select all date for Rwanda and Afghanistan. Since we want either Rwanda or Afghanistan is true, so use "|" or "%in%" to get all data.
 
 ```{r}
 filter(gapminder, country == "Afghanistan")
 ```
-If select for Afghanistan or Rwanda alone, there are total 12 data, instead of 6. Since we want either Rwanda or Afghanistan is true, so use "|" or "%in%" to get all data.
-
 
 ```{r}
 filter(gapminder, 
@@ -141,7 +148,7 @@ filter(gapminder,
 2. Present numerical tables in a more attractive form, such as using knitr::kable().
 
 ```{r}
-knitr::kable(gapminder, "html")
+knitr::kable(head(gapminder), "html")
 ```
 
 3. Use more of the dplyr functions for operating on a single table
@@ -162,9 +169,13 @@ gapminder %>%
 
 4. Adapt exercises from the chapters in the “Explore” section of R for Data Science to the Gapminder dataset.
 
+How many rows and variables in mpg?
+there are 234 rows and 11 variables
+
 ```{r}
 dim(mpg)
 ```
+Make a plot of cyl vs hwy in ggplot.
 
 ```{r}
 p <-ggplot(data = mpg,
