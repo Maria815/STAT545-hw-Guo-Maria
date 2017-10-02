@@ -1,0 +1,20 @@
+---
+title: "hw3 about dplyr and ggplot2"
+author: "Maria Guo"
+date: "October 1, 2017"
+output: html_document
+---
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))  # The tidyverse contains ggplot2!
+suppressPackageStartupMessages(library(gapminder))
+knitr::opts_chunk$set(fig.width=4, fig.height=3)
+```
+
+
+1. Get the maximum and minimum of GDP per capita for all continents.
+
+```{r}
+p1 <- ggplot(gapminder, aes(x=continent, y=gdpPercap)) +
+      geom_bar()
+```
