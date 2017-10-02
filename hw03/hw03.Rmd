@@ -53,4 +53,4 @@ ggplot(gapminder, aes(year, lifeExp)) +
 
 4. Process
 
-sdf
+To start the homework, I first make a new folder for hw03 in github, and then pull from github and write code in R markdown file, commit and push all to my repository.
