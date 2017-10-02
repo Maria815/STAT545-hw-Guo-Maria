@@ -1,21 +1,21 @@
-# hw3 about dplyr and ggplot2
-Maria Guo  
-October 1, 2017  
-
-
-```r
+---
+title: "hw03"
+author: "Maria Guo"
+date: "October 1, 2017"
+output: 
+  html_document: 
+    keep_md: yes
+---
+```{r}
 suppressPackageStartupMessages(library(tidyverse))  # The tidyverse contains ggplot2!
 suppressPackageStartupMessages(library(gapminder))
 knitr::opts_chunk$set(fig.width=4, fig.height=3)
 ```
 
-
 1. Get the maximum and minimum of GDP per capita for all continents.
 
 Among all continents, the maximum GDP per capita is 113523.13 from Asia, and the minimum is 241.1659 from Africa.
-
-
-```r
+```{r}
 gapminder %>%
     group_by(continent) %>% 
     summarize(max_gdpPercap = max(gdpPercap),
@@ -24,9 +24,7 @@ gapminder %>%
     geom_col() 
 ```
 
-![](hw03_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
-
-```r
+```{r}
 gapminder %>%
     group_by(continent) %>% 
     summarize(max_gdpPercap = max(gdpPercap),
@@ -34,45 +32,26 @@ gapminder %>%
     ggplot(aes(continent, min_gdpPercap)) +
     geom_col() 
 ```
-
-![](hw03_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
-
-
-
 2. Look at the spread of GDP per capita within the continents.
 
 In Africa, gdpPercap ranges from 0 to 20000; In Americas, it ranges from 0 to 45000; In Asia, it ranges from 0 to 91500; In Europe, it ranges from 0 to 48000, and in Oceania, it ranges from 10000 to 32000.
 
-
-```r
+```{r}
 ggplot(gapminder, aes(continent, gdpPercap)) +
     geom_point()
 ```
-
-![](hw03_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 3. How is life expectancy changing over time on different continents?
 
 Overall, life expectancy continue growing from 1950 to 2000 in all continents.
 
-```r
+```{r}
 ggplot(gapminder, aes(year, lifeExp)) +
     facet_wrap(~ continent) +
     geom_smooth(se=FALSE, method = "lm")
 ```
 
-![](hw03_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
-
-
-
-
-
-
-
-
-
-
-
+4. Process
 
 
 
