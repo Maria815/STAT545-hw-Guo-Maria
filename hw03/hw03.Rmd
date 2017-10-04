@@ -99,7 +99,29 @@ ggplot(gapminder, aes(year, lifeExp)) +
          title = "Change of Life Expectancy over time")
 ```
 
-4. Process
 
-To start the homework, I first make a new folder for hw03 in github, and then pull from github and write code in R markdown file, commit and push all to my repository.
+
+
+4. But I want to do more
+```{r results = 'asis', echo=FALSE} 
+tbl1 <- gapminder %>% 
+  group_by(continent) %>% 
+  summarise(mean_lifeExp=mean(lifeExp)) 
+
+knitr::kable(tbl1) 
+```
+```{r results = 'asis', echo=FALSE}
+ggplot(gapminder, 
+       aes(x = continent, y = gdpPercap, color = continent)) +
+       geom_point() + 
+       ggtitle("GDP per cap by continent") 
+```
+
+
+
+5. Process
+
+1. This assignment is a bit harder than last one, but I will quite interesting when I was working on this, as I apply and combine the functions learned in class to generate multiple graphs and tables.
+
+2. At begining, it is quite confused me about how well should I do, like how detail should I go into, later, I just found that as long as I understand each function and apply to my tables/graphs, I learn something from the assignment.
 
