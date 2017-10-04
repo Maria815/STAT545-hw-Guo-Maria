@@ -12,7 +12,7 @@ suppressPackageStartupMessages(library(gapminder))
 knitr::opts_chunk$set(fig.width=4, fig.height=3)
 ```
 
-1. Get the maximum and minimum of GDP per capita for all continents.
+## 1. Get the maximum and minimum of GDP per capita for all continents.
 
 Among all continents, the maximum GDP per capita is 113523.13 from Asia, and the minimum is 241.1659 from Africa.
 ```{r}
@@ -48,7 +48,7 @@ gapminder %>%
 For maximum gdp, its quite high in Asia and no much difference among other continents. For minimum gdp, the highest minimum gdp is in Oceania and lowest in Africa and Asia, no much difference in Americas and Europe.
 
 
-2. Look at the spread of GDP per capita within the continents.
+## 2. Look at the spread of GDP per capita within the continents.
 
 In Africa, gdpPercap ranges from 0 to 20000; In Americas, it ranges from 0 to 45000; In Asia, it ranges from 0 to 91500; In Europe, it ranges from 0 to 48000, and in Oceania, it ranges from 10000 to 32000.
 
@@ -83,7 +83,7 @@ In Africa, GDP per capita mainly focuses on a narrow range, however, in other co
 
 
 
-3. How is life expectancy changing over time on different continents?
+## 3. How is life expectancy changing over time on different continents?
 
 Overall, life expectancy continue growing from 1950 to 2000 in all continents.
 
@@ -99,7 +99,7 @@ ggplot(gapminder, aes(year, lifeExp)) +
          title = "Change of Life Expectancy over time")
 ```
 
-4. My own question
+## 4. My own question
 
 Figure out the associate between lifeExp and population in all continents.
 
@@ -119,7 +119,7 @@ It is clearly that in all continents, life expectancy is positively correlated w
 
 
 
-5. But I want to do more
+## 5. But I want to do more
 
 ```{r results = 'asis', echo=FALSE}
 tbl1 <- gapminder %>% 
@@ -138,7 +138,7 @@ ggplot(gapminder,
 
 
 
-6. Process
+## 6. Process
 
 1. This assignment is a bit harder than last one, but I will quite interesting when I was working on this, as I apply and combine the functions learned in class to generate multiple graphs and tables.
 
