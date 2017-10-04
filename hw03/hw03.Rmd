@@ -99,27 +99,46 @@ ggplot(gapminder, aes(year, lifeExp)) +
          title = "Change of Life Expectancy over time")
 ```
 
+4. My own question
+
+Figure out the associate between lifeExp and population in all continents.
+
+```{r}
+ggplot(gapminder, aes(pop/10^6, lifeExp)) +
+    geom_point(aes(colour=continent),
+               alpha=0.2) +
+    facet_wrap(~ continent) +
+    scale_colour_discrete("Continents of\n the World") +
+    scale_x_log10("Population in millions",
+                  breaks=c( 1, 10, 100)) +
+    theme_bw() +
+    labs(y="Life Expectancy", title ="The relationship between population and life expectancy in each continent")
+```
+
+It is clearly that in all continents, life expectancy is positively correlated with population
 
 
 
-4. But I want to do more
-```{r results = 'asis', echo=FALSE} 
+5. But I want to do more
+
+```{r results = 'asis', echo=FALSE}
 tbl1 <- gapminder %>% 
   group_by(continent) %>% 
   summarise(mean_lifeExp=mean(lifeExp)) 
 
 knitr::kable(tbl1) 
-```
-```{r results = 'asis', echo=FALSE}
+
 ggplot(gapminder, 
-       aes(x = continent, y = gdpPercap, color = continent)) +
-       geom_point() + 
-       ggtitle("GDP per cap by continent") 
+       aes(x = continent, y = pop, color = continent, fill = continent)) +
+       geom_area() + 
+       theme_bw() +
+       labs(x="Continent", y="Population", 
+            title = "Population In Each Continent")
 ```
 
 
 
-5. Process
+6. Process
 
 1. This assignment is a bit harder than last one, but I will quite interesting when I was working on this, as I apply and combine the functions learned in class to generate multiple graphs and tables.
 
