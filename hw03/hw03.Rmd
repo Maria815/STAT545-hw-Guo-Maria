@@ -17,11 +17,22 @@ knitr::opts_chunk$set(fig.width=4, fig.height=3)
 Among all continents, the maximum GDP per capita is 113523.13 from Asia, and the minimum is 241.1659 from Africa.
 ```{r}
 gapminder %>%
+  group_by(continent) %>% 
+  summarize(max_gdpPercap=max(gdpPercap), 
+            min_gdpPercap=min(gdpPercap))
+```
+
+
+
+```{r}
+gapminder %>%
     group_by(continent) %>% 
     summarize(max_gdpPercap = max(gdpPercap),
               min_dpgPercap = min(gdpPercap)) %>%
     ggplot(aes(continent, max_gdpPercap)) +
-    geom_col() 
+    geom_col(fill=continent_colors) +
+    theme_bw() +
+    labs(title="The Maximum GDP per capita of all Continents")
 ```
 
 ```{r}
@@ -30,16 +41,47 @@ gapminder %>%
     summarize(max_gdpPercap = max(gdpPercap),
               min_gdpPercap = min(gdpPercap)) %>%
     ggplot(aes(continent, min_gdpPercap)) +
-    geom_col() 
+    geom_bar(aes(continent, min_gdpPercap), stat="identity",  fill=continent_colors) +
+    theme_bw() +
+    labs(title="The Minimum GDP per capita of all Continents")
 ```
+For maximum gdp, its quite high in Asia and no much difference among other continents. For minimum gdp, the highest minimum gdp is in Oceania and lowest in Africa and Asia, no much difference in Americas and Europe.
+
+
 2. Look at the spread of GDP per capita within the continents.
 
 In Africa, gdpPercap ranges from 0 to 20000; In Americas, it ranges from 0 to 45000; In Asia, it ranges from 0 to 91500; In Europe, it ranges from 0 to 48000, and in Oceania, it ranges from 10000 to 32000.
 
 ```{r}
 ggplot(gapminder, aes(continent, gdpPercap)) +
-    geom_point()
+    geom_point() +
+    theme_bw() +
+    labs(x="Continent", y="GDP per Capita")
 ```
+
+
+```{r}
+p1 <-gapminder %>% 
+  group_by(continent) %>%
+  summarize(min_gdp = min(gdpPercap),
+         max_gdp = max(gdpPercap),
+         mean_gdp = mean(gdpPercap), 
+         variant_gdp = var(gdpPercap), 
+         median_gdp = median(gdpPercap))
+
+knitr::kable(p1, align = 'c', format = 'markdown', digits = 2, col.names = c("Continent", "Min GDP per cap", "Max GDP per cap", "Mean", "Variant", "Median"))
+```
+
+```{r}
+ggplot(gapminder, aes(gdpPercap)) +
+  facet_wrap(~ continent) +
+  geom_density(color = "red", fill="red") +
+  labs(x="GDP per capita", y="Frequency", title = "The spread of GDP per capita in each continent")
+```
+In Africa, GDP per capita mainly focuses on a narrow range, however, in other continent, like Americas, not onlyl presents with specific values, but also spread through a wide range of values.
+
+
+
 
 3. How is life expectancy changing over time on different continents?
 
@@ -48,9 +90,16 @@ Overall, life expectancy continue growing from 1950 to 2000 in all continents.
 ```{r}
 ggplot(gapminder, aes(year, lifeExp)) +
     facet_wrap(~ continent) +
-    geom_smooth(se=FALSE, method = "lm")
+    geom_point(aes(year, lifeExp), color = "pink", alpha=0.25) +
+    geom_smooth(se=FALSE, method = "lm", span=0.9) +
+    theme(strip.background = element_rect(fill="white"),
+          axis.title = element_text(size=10),
+          strip.text = element_text(size=10, face="bold")) + 
+    labs(x="Year", y="Life Expectancy", 
+         title = "Change of Life Expectancy over time")
 ```
 
 4. Process
 
 To start the homework, I first make a new folder for hw03 in github, and then pull from github and write code in R markdown file, commit and push all to my repository.
+
