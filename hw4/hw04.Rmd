@@ -24,7 +24,9 @@ lifeExp_Country <- gapminder %>%
         filter(country %in% c('Canada', 'India', 'China')) %>%
         select(country, year, lifeExp)
 
-knitr::kable(lifeExp_Country, col.names = c("Country", "Year", "Life Expectation"))
+knitr::kable(lifeExp_Country, 
+             align = 'c', format = 'markdown',
+             col.names = c("Country", "Year", "Life Expectation"))
 ```
 
 Then, to reshape these data, I will use spread(), which can make “wide” data longer.
@@ -117,7 +119,7 @@ second_data_frame <- gapminder %>%
     group_by(year,continent) %>% 
     summarize(mean_pop=mean(pop))
 
-knitr::kable(head(second_data_frame))
+knitr::kable(second_data_frame, align = 'c',format = 'markdown',)
 ```
 
 Then, I will play around with these two data frame by using various joint functions.
