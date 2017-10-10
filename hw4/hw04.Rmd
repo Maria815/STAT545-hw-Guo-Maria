@@ -38,8 +38,7 @@ reshape_data <- lifeExp_Country %>%
 knitr::kable(reshape_data,col.names = 
         c('Year','Canada', 'China', 'India'),
         align = 'c',
-        format = 'markdown',
-        caption = "<h4>Life Expectancy in Canada, China and India Followed by Year</h4>")
+        format = 'markdown')
 ```
 
 To make format better and easier to read. I will make a scatterplot.
