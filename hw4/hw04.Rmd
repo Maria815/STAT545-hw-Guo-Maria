@@ -52,9 +52,9 @@ lifeExp_Country %>%
       labels = as.character(seq(1950, 2010, 10)),
       limits = c(1950, 2010),
       minor_breaks = NULL) +
-  scale_y_continuous(breaks = seq(0, 85, 5),
-      labels = as.character(seq(0, 85, 5)),
-      limits = c(5, 85),
+  scale_y_continuous(breaks = seq(20, 85, 5),
+      labels = as.character(seq(20, 85, 5)),
+      limits = c(25, 85),
       minor_breaks = NULL) +
   theme_bw() + 
   labs(x = "Year", y = "Life Expectancy",
@@ -99,6 +99,10 @@ mean_lifeExp %>%
         labels = as.character(seq(1950, 2010, 10)),
         limits = c(1950, 2010),
         minor_breaks = NULL) +
+        scale_y_continuous(breaks = seq(20, 85, 5),
+        labels = as.character(seq(20, 85, 5)),
+        limits = c(25, 85),
+        minor_breaks = NULL) +
         scale_colour_discrete(name = "continent") +
         theme_bw() +
         labs(x = "Year", y = "Mean Life Expectancy",
@@ -111,14 +115,15 @@ mean_lifeExp %>%
 
 ## Activity 1
 
-First, I have to make a second data frame. This time, I use mean population in all continents by year. At this time, to shorter the table, I only show the head part.
+First, I have to make a second data frame. This time, I use mean population in all continents by year. 
 ```{r}
 second_data_frame <- gapminder %>% 
     filter(continent=="Asia") %>% 
     group_by(year,continent) %>% 
     summarize(mean_pop=mean(pop))
 
-knitr::kable(second_data_frame, align = 'c',format = 'markdown',)
+knitr::kable(second_data_frame, align = 'c',format = 'markdown', 
+             col.names = c("Year", "Continent", "Mean Population"))
 ```
 
 Then, I will play around with these two data frame by using various joint functions.
@@ -142,14 +147,14 @@ It retains all data in both data frame.
 full_join(gapminder,second_data_frame, by = c("continent","year"))
 ```
 ### Inner Join
-It retains the data that only present in both data frame and add new columns to gapminder.
+It retains the data that only present in both data frame and add new columns to gapminder. So everything that associate with Asia is showed with data of mean population.
 ```{r}
 inner_join(gapminder,second_data_frame, by = c("continent","year"))
 ```
 
 
 ### Semi Join
-It is used to filter out the data that does not match with the one in second data frame, but does not add new columns to gapminder.
+It is used to filter out the data that does not match with the one in second data frame, but does not add mean population to gapminder.
 
 ```{r}
 semi_join(gapminder,second_data_frame, by = c("continent","year"))
@@ -157,11 +162,10 @@ semi_join(gapminder,second_data_frame, by = c("continent","year"))
 
 ### Anti Join
 
-This is the inverse type of semi join. It only keep the data that is not present in second data frame. Therefore, all Asia data are removed.
+This is the inverse type of semi join. It only keep the data that is not present in second data frame. Therefore, all Asia data are removed and mean population is not added.
 ```{r}
 anti_join(gapminder,second_data_frame, by = c("continent","year"))
 ```
-
 
 
 
