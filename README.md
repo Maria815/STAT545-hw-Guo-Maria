@@ -5,4 +5,4 @@ Hi, homework 3 is ready now. [link to hw3](https://github.com/Maria815/STAT545-h
 ## Homework 4
 [link](https://github.com/Maria815/STAT545-hw-Guo-Maria/tree/master/hw4) to homework 4 folder.
 
-[link](https://github.com/Maria815/STAT545-hw-Guo-Maria/blob/master/hw4/hw04.md) to homework4.
+[link](https://github.com/Maria815/STAT545-hw-Guo-Maria/blob/master/hw4/hw04.md) to homework 4 file.
