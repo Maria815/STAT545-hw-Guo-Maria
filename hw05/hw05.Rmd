@@ -228,4 +228,3 @@ Now we know that 4 countries are having rain and only 2 countries are sunny.
 3. It is interesting to know how to change or design color in a plot to have better visual effect.
 4. It is also good to learn how to write figure to file.
 Overall, as my last assignment, I had a fun time dealing with it.
-
